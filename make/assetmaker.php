@@ -38,7 +38,7 @@
 				break;
 			}
 			
-			$content = '/* Generated at '.date('r').' */ '.$content;
+			#$content = '/* Generated at '.date('r').' */ '.$content;
 			
 			//Save it
 			$this->save( $what , $cacheFilename , $content );
