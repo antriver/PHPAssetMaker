@@ -7,6 +7,27 @@
 		]
 	},
 	
+	"wwwjs":{
+		"type":"js",
+		"files":[
+			"/home/ctrlv/assets/js/www.js"
+		]
+	},
+	
+	"pastejava":{
+		"type":"js",
+		"files":[
+			"/home/ctrlv/assets/js/paste_java.js"
+		]
+	},
+	
+	"pastehtml5":{
+		"type":"js",
+		"files":[
+			"/home/ctrlv/assets/js/paste_html5.js"
+		]
+	},
+	
 	"mobilestyle":{
 		"type":"css",
 		"files":[

@@ -90,7 +90,7 @@
 			
 			require_once __DIR__.'/thirdparty/jshrink.php';
 			
-			return \JShrink\Minifier::minify($$content);
+			return \JShrink\Minifier::minify( $content );
 		}
 		
 		private function save( $dir , $filename , $contents )
