@@ -76,9 +76,6 @@
 					//Get the size of the image
 					$imageSize = getimagesize($directory->path.$filename);
 					
-					//Since we're simply building a vertical list, we just add each image's height to the y offset
-					$y += $imageSize[1];
-					
 					//Create a class for this image
 					$className = $this->makeClassNameFromFilename( $filename );
 					
@@ -90,6 +87,10 @@
 					
 					//Add the rule for this image
 					$this->css[ $className ]['background-position'] = '0px -'.$y.'px';
+					
+					//Since we're simply building a vertical list, we just add each image's height to the y offset
+					$y += $imageSize[1];
+					
 				}
 			}
 		
@@ -105,19 +106,13 @@
 			//Combine all the images using imagemagicks's montage
 			$images = "'".implode("' '",$this->images)."'";
 			$cmd = 'montage '.$images.' -background transparent -mode Concatenate -tile 1x -geometry +0+0 '.$this->outimagepath;
+			echo "\n$cmd\n";
 			exec($cmd);
 			
-			//Optimise the resulting image with pngcrush
-			
-			//Gotta move the input file so pngcrush can overwrite the output
-			$tmpPath = '/tmp/'.uniqid();
-			exec('mv '.$this->outimagepath.' '.$tmpPath);
-			
-			$cmd = 'pngcrush -reduce -brute '.$tmpPath.' '.$this->outimagepath;
+			//Optimise the resulting image with optipng
+			$cmd = 'optipng -o6 '.$this->outimagepath;
+			echo "\n$cmd\n";
 			exec($cmd);
-			
-			//Remove tmp image
-			exec('rm -f '.$tmpPath);
 		}
 		
 		

@@ -56,6 +56,8 @@
 			
 			$version = date('YmdHis');
 			
+			echo "\nMaking source $sourceName $version\n";
+			
 			switch( $source->type )
 			{
 				case 'css':
