@@ -1,8 +1,0 @@
-RewriteEngine On
-
-# cached version doesn't exist - send to maker to generate it
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)/([0-9]+)\.([a-z]+) make/index.php?name=$1&version=$2&ext=$3 [L]
-
-Header set Expires "Fri, 1 Jan 2100 00:00:00 GMT"
-Header set Cache-Control "public, no-transform"
