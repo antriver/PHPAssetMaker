@@ -49,9 +49,9 @@
 			
 			$source = $this->settings->sources->{$sourceName};
 			
-			if ( count($source->files) < 1 )
+			if ( count($source->input) < 1 )
 			{
-				throw new Exception('Source has no files');
+				throw new Exception('Source has no input files');
 			}
 			
 			$version = date('YmdHis');
@@ -60,8 +60,16 @@
 			{
 				case 'css':
 					$content = '';
-					foreach ( $source->files as $file )
+					foreach ( $source->input as $file )
 					{
+						if ( $file->sprites )
+						{
+							//Include the sprite css already generated
+							$versionFilenames = $this->getVersionFilenames();
+							$content .= $this->readFile( $versionFilenames[$file->sprites] );
+							continue;
+						}
+						
 						$fileContent = $this->readFile($file->path);
 						if ( $file->minify )
 						{
@@ -74,12 +82,11 @@
 					}
 					$content = rtrim($content);
 					$outputFilename = $sourceName.'-'.$version.'.css';
-					$ext = 'css';
 				break;
 				
 				case 'js':
 					$content = '';
-					foreach ( $source->files as $file )
+					foreach ( $source->input as $file )
 					{
 						$fileContent = $this->readFile($file->path);
 						if ( $file->minify )
@@ -93,7 +100,15 @@
 					}
 					$content = rtrim($content);
 					$outputFilename = $sourceName.'-'.$version.'.js';
-					$ext = 'js';
+				break;
+				
+				case 'sprites':
+					require_once __DIR__.'/spritemaker.php';
+					$spritemaker = new spritemaker( $sourceName , $source , $this->settings->outdir , $this->settings->outurl , $version );
+					$spritemaker->makeSprites();
+					$content = $spritemaker->getCSS();
+					$content = $this->css($content); //Minify it
+					$outputFilename = $sourceName.'-'.$version.'.css';
 				break;
 			}
 			
@@ -101,7 +116,7 @@
 			$this->saveFile( $outputFilename , $content );
 			
 			//Set latest version
-			$this->updateVersionURL( $sourceName , $version , $ext );
+			$this->updateVersionURL( $sourceName , $outputFilename );
 			
 			//Return it
 			return $content;
@@ -112,7 +127,7 @@
 		{
 			if ( !file_exists($path) )
 			{
-				throw new Exception('Unable to read source file: '.$path);
+				throw new Exception('Unable to read file: '.$path);
 			}
 			return file_get_contents($path);
 		}
@@ -145,7 +160,7 @@
 			fclose($file);
 		}
 		
-		private function updateVersionURL( $sourceName , $version , $ext )
+		private function updateVersionURL( $sourceName , $filename )
 		{
 			if ( file_exists($this->settings->versionfile) )
 			{
@@ -157,11 +172,22 @@
 				$versions = array();
 			}
 			
-			$versions[$sourceName] = $this->settings->outurl.$sourceName.'-'.$version.'.'.$ext;
+			$versions[$sourceName] = $this->settings->outurl.$filename;
 			
 			$output = '<?php return '.var_export($versions,true).'; ?>';
 			
 			file_put_contents($this->settings->versionfile, $output);
+		}
+		
+		private function getVersionFilenames()
+		{
+			$versionURLs = include $this->settings->versionfile;
+			$versionFilenames = array();
+			foreach ( $versionURLs as $name => $url )
+			{
+				$versionFilenames[$name] = str_replace($this->settings->outurl,$this->settings->outdir,$url);
+			}
+			return $versionFilenames;
 		}
 	
 	}

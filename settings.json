@@ -5,10 +5,21 @@
 	
 	"sources":{
 	
+		"wwwsprites":{
+			"type":"sprites",
+			"className":"sprite",
+			"width":16,
+			"height":16,
+			"input":[
+				{"className":"icon","classPrefix":"icon-","width":16,"height":16,"path":"/home/ctrlv/www/test/images/"}
+			]
+		},
+	
 		"wwwstyle":{
 			"type":"css",
-			"files":[
+			"input":[
 				{"path":"/home/ctrlv/assets/css/custom-theme/jquery-ui-1.8.23.custom.css","minify":true},
+				{"sprites":"wwwsprites"},
 				{"path":"/home/ctrlv/assets/css/wintersprites.css","minify":true},
 				{"path":"/home/ctrlv/assets/css/www.css","minify":true}
 			]
@@ -16,7 +27,7 @@
 		
 		"wwwjs":{
 			"type":"js",
-			"files":[
+			"input":[
 				{"path":"/home/ctrlv/assets/js/jquery.1.7.2.min.js","minify":false},
 				{"path":"/home/ctrlv/assets/js/jquery-ui.1.8.21.min.js","minify":false},
 				{"path":"/home/ctrlv/assets/js/www.js","minify":true}
@@ -25,18 +36,18 @@
 		
 		"pastejava":{
 			"type":"js",
-			"files":[
+			"input":[
 				{"path":"/home/ctrlv/assets/js/paste_java.js","minify":true}
 			]
 		},
 		
 		"pastehtml5":{
 			"type":"js",
-			"files":[
+			"input":[
 				{"path":"/home/ctrlv/assets/js/paste_html5.js","minify":true}
 			]
 		}
 		
 	}
-
+	
 }
