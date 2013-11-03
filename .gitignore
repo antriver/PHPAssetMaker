@@ -1,4 +1,1 @@
-*
-!/maker/
-make/sources.json
-!.htaccess
+.DS_Store

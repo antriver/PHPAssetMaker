@@ -1,0 +1,42 @@
+{
+	"outdir":"/home/ctrlv/assets/generated/",
+	"outurl":"http://assets.ctrlv.in/generated/",
+	"versionfile":"/home/ctrlv/assets/generated/versions.php",
+	
+	"sources":{
+	
+		"wwwstyle":{
+			"type":"css",
+			"files":[
+				{"path":"/home/ctrlv/assets/css/custom-theme/jquery-ui-1.8.23.custom.css","minify":true},
+				{"path":"/home/ctrlv/assets/css/wintersprites.css","minify":true},
+				{"path":"/home/ctrlv/assets/css/www.css","minify":true}
+			]
+		},
+		
+		"wwwjs":{
+			"type":"js",
+			"files":[
+				{"path":"/home/ctrlv/assets/js/jquery.1.7.2.min.js","minify":false},
+				{"path":"/home/ctrlv/assets/js/jquery-ui.1.8.21.min.js","minify":false},
+				{"path":"/home/ctrlv/assets/js/www.js","minify":true}
+			]
+		},
+		
+		"pastejava":{
+			"type":"js",
+			"files":[
+				{"path":"/home/ctrlv/assets/js/paste_java.js","minify":true}
+			]
+		},
+		
+		"pastehtml5":{
+			"type":"js",
+			"files":[
+				{"path":"/home/ctrlv/assets/js/paste_html5.js","minify":true}
+			]
+		}
+		
+	}
+
+}
