@@ -87,6 +87,11 @@
 					
 					//Add the rule for this image
 					$this->css[ $className ]['background-position'] = '0px -'.$y.'px';
+					if ( $directory->includeSize ) 
+					{
+						$this->css[ $className ]['width'] = $imageSize[0].'px';
+						$this->css[ $className ]['height'] = $imageSize[1].'px';
+					}
 					
 					//Since we're simply building a vertical list, we just add each image's height to the y offset
 					$y += $imageSize[1];
