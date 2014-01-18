@@ -23,7 +23,7 @@ try {
 		
 	}
 
-	$maker = new \TMD\AssetMaker(__DIR__ . '/settings.json');
+	$maker = new \TMD\AssetMaker($settingsFile);
 
 	if ($source == 'all') {
 		$maker->makeAll();
