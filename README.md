@@ -12,8 +12,11 @@ PHP thingy for serving combined, minified, and cached css and javascript. Now wi
 
 ## Usage
  
-### Settings (settings.json)
-This should be the only file you need to edit. See the included sample file to help understand. Here's a rundown of the settings:
+### Settings (settings.json.template)
+
+First, copy the settings.json.template file to the directory that contains the 'assetmaker' directory and rename it to assetmaker-settings.json.
+
+Then edit the assetmaker-settings.json file with your settings. This should be the only file you need to edit. See the included sample file to help understand. Here's a rundown of the settings:
 
 * `outdir` is the directory where the final combined, minified etc. files will be saved. Specify a full path to the directory. e.g. **/home/ctrlv/assets/generated/**. Make sure this directory is writable by the user the script runs as.
 * `outurl` should be the public facing URL to access the files in `outdir`. Specify a full URL. e.g. **http://assets.ctrlv.in/generated/**
