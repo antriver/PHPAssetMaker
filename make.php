@@ -1,11 +1,11 @@
 <?php
 
-$source = $argv[1];
+$source = !empty($argv[1]) ? $argv[1] : false;
 if (!$source) {
 	die('A source is required (or use "all" to make everything)');
 }
 
-require __DIR__ . '/lib/assetmaker.php';
+require __DIR__ . '/lib/AssetMaker.php';
 
 try {
 	$maker = new \TMD\AssetMaker(__DIR__ . '/settings.json');

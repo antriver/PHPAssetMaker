@@ -121,7 +121,7 @@ class AssetMaker
 	private function css($content)
 	{
 		require_once __DIR__ . '/thirdparty/cssmin.php';
-		return CssMin::minify($content);
+		return \CssMin::minify($content);
 	}
 
 	//Minify a string contining javascript
