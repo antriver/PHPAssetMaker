@@ -15,7 +15,7 @@ try {
 		
 	} else if (file_exists(dirname(__DIR__) . '/assetmaker-settings.json')) {
 	
-		$settingsFile = dirname(__DIR__) . '/assetmaker-settings.json');
+		$settingsFile = dirname(__DIR__) . '/assetmaker-settings.json';
 		
 	} else {
 	
