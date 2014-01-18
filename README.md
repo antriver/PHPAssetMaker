@@ -14,7 +14,7 @@ PHP thingy for serving combined, minified, and cached css and javascript. Now wi
  
 ### Settings (settings.json.template)
 
-First, copy the settings.json.template file to the directory that contains the 'assetmaker' directory and rename it to assetmaker-settings.json.
+First, copy the `settings.json.template` file to the directory that contains the `assetmaker` directory and rename it to `assetmaker-settings.json`.
 
 ![Where to put the settings file](http://img.ctrlv.in/img/52d9f7bac7b72.png)
 
