@@ -56,7 +56,7 @@ class AssetMaker
 			case 'css':
 				$content = '';
 				foreach ($source->input as $file) {
-					if ($file->sprites) {
+					if (!empty($file->sprites)) {
 						//Include the sprite css already generated
 						$versionFilenames = $this->getVersionFilenames();
 						$content .= $this->readFile($versionFilenames[$file->sprites]);
@@ -78,7 +78,7 @@ class AssetMaker
 				$content = '';
 				foreach ($source->input as $file) {
 					$fileContent = $this->readFile($file->path);
-					if ($file->minify) {
+					if (!empty($file->minify)) {
 						$content .= $this->js($fileContent) . ' ';
 					} else {
 						$content .= $fileContent . ' ';
@@ -150,7 +150,7 @@ class AssetMaker
 			$versions = include $this->settings->versionfile;
 		}
 
-		if (!is_array($versions)) {
+		if (empty($versions) || !is_array($versions)) {
 			$versions = array();
 		}
 
