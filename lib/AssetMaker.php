@@ -16,12 +16,12 @@ class AssetMaker
 	{
 		$settings = @file_get_contents($settingsFile);
 		if (!$settings) {
-			throw new Exception('Settings file does not exist or cold not be read: ' . $settingsFile);
+			throw new \Exception('Settings file does not exist or cold not be read: ' . $settingsFile);
 		}
 
 		$settings = @json_decode($settings);
 		if (!is_object($settings)) {
-			throw new Exception('Settings file is not valid JSON: ' . $settingsFile);
+			throw new \Exception('Settings file is not valid JSON: ' . $settingsFile);
 		}
 
 		$this->settings = $settings;
@@ -39,13 +39,13 @@ class AssetMaker
 	public function make($sourceName)
 	{
 		if (!isset($this->settings->sources->{$sourceName})) {
-			throw new Exception('Unknown source: ' . $sourceName);
+			throw new \Exception('Unknown source: ' . $sourceName);
 		}
 
 		$source = $this->settings->sources->{$sourceName};
 
 		if (count($source->input) < 1) {
-			throw new Exception('Source has no input files');
+			throw new \Exception('Source has no input files');
 		}
 
 		$version = date('YmdHis');
@@ -112,7 +112,7 @@ class AssetMaker
 	private function readFile($path)
 	{
 		if (!file_exists($path)) {
-			throw new Exception('Unable to read file: ' . $path);
+			throw new \Exception('Unable to read file: ' . $path);
 		}
 		return file_get_contents($path);
 	}
@@ -138,7 +138,7 @@ class AssetMaker
 
 		$file = fopen($path, 'w+');
 		if (!$file) {
-			throw new Exception('Unable to open output file for writing: ' . $path);
+			throw new \Exception('Unable to open output file for writing: ' . $path);
 		}
 		fwrite($file, $contents);
 		fclose($file);
