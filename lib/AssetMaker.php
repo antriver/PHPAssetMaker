@@ -177,13 +177,19 @@ class AssetMaker
 		return $versionFilenames;
 	}
 	
-	private function gzip($path)
+	private function compress($path)
 	{
 		if (!$this->zopfli) {
 			return false;
 		}
 		
-		exec("{$this->zopfli} --i1000 {$path}");
-		exec("touch {$path} {$path}.gz");
+		$cmd = "{$this->zopfli} --i1000 {$path}";
+		echo "\n$cmd";
+		exec($cmd);
+		
+		$cmd = "touch {$path} {$path}.gz";
+		echo "\n$cmd";
+		exec($cmd);
+
 	}
 }
