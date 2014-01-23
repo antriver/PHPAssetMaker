@@ -56,14 +56,14 @@ class SpriteMaker
 		foreach ($this->settings->input as $i => $directory) {
 
 			//If this is the first and only directory...
-			if ($directory->className) {
+			if (!empty($directory->className)) {
 				$this->css[$directory->className] = array();
 
 				//If a class was given for this directory and a width or height was given
-				if ($directory->width) {
+				if (!empty($directory->width)) {
 					$this->css[$directory->className]['width'] = $directory->width . 'px';
 				}
-				if ($directory->height) {
+				if (!empty($directory->height)) {
 					$this->css[$directory->className]['height'] = $directory->height . 'px';
 				}
 			}
@@ -89,7 +89,7 @@ class SpriteMaker
 
 				//Add the rule for this image
 				$this->css[$className]['background-position'] = '0px -' . $y . 'px';
-				if ($directory->includeSize) {
+				if (!empty($directory->includeSize)) {
 					$this->css[$className]['width'] = $imageSize[0] . 'px';
 					$this->css[$className]['height'] = $imageSize[1] . 'px';
 				}
