@@ -5,10 +5,12 @@ namespace TMD;
 class AssetMaker
 {
 	private $settings;
+	private $zopfli;
 
 	public function __construct($settingsFile)
 	{
 		$this->loadSettings($settingsFile);
+		$this->zopfli = exec('which zopfli');
 	}
 
 	//Load the JSON file with the settings
@@ -132,7 +134,7 @@ class AssetMaker
 	}
 
 	//Save the contents of a file to the output directory
-	private function saveFile($filename, $contents)
+	private function saveFile($filename, $contents, $compress = true)
 	{
 		$path = $this->settings->outdir . $filename;
 
@@ -142,6 +144,10 @@ class AssetMaker
 		}
 		fwrite($file, $contents);
 		fclose($file);
+		
+		if ($compress) {
+			$this->compress($path);
+		}
 	}
 
 	private function updateVersionURL($sourceName, $filename)
@@ -169,5 +175,15 @@ class AssetMaker
 			$versionFilenames[$name] = str_replace($this->settings->outurl, $this->settings->outdir, $url);
 		}
 		return $versionFilenames;
+	}
+	
+	private function gzip($path)
+	{
+		if (!$this->zopfli) {
+			return false;
+		}
+		
+		exec("{$this->zopfli} --i1000 {$path}");
+		exec("touch {$path} {$path}.gz");
 	}
 }
