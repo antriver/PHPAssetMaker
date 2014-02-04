@@ -1,7 +1,7 @@
 PHPAssetMaker
 =============
 
-PHP thingy for serving combined, minified, and cached css and javascript. Now with sprite generation too.
+A PHP tool to generate combined and minfied CSS, CSS Sprites, and Javascript
 
 
 ## How it works
