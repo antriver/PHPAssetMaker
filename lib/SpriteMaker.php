@@ -31,8 +31,8 @@ class SpriteMaker
 	public function makePaths($name, $outdir, $outurl, $versionnum)
 	{
 		$this->outcsspath = $outdir . $name . '-' . $versionnum . '.css';
-		$this->outimagepath = $outdir . $name . '-' . $versionnum . $this->settings->format;
-		$this->outimageurl = $outurl . $name . '-' . $versionnum . $this->settings->format;
+		$this->outimagepath = $outdir . $name . '-' . $versionnum . '.' . $this->settings->format;
+		$this->outimageurl = $outurl . $name . '-' . $versionnum . '.' . $this->settings->format;
 	}
 
 	//Process the input directories, find the images in them and stick them into CSS rules
