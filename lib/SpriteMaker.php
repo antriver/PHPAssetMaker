@@ -4,7 +4,6 @@ namespace TMD;
 
 class SpriteMaker
 {
-
 	//Contains css classes to be made into a stylesheet
 	private $css = array();
 
@@ -20,6 +19,11 @@ class SpriteMaker
 	public function __construct($name, $settings, $outdir, $outurl, $versionnum)
 	{
 		$this->settings = $settings;
+
+		if (!$this->settings->format) {
+			$this->settings->format = 'png';
+		}
+
 		$this->makePaths($name, $outdir, $outurl, $versionnum);
 	}
 
@@ -27,14 +31,13 @@ class SpriteMaker
 	public function makePaths($name, $outdir, $outurl, $versionnum)
 	{
 		$this->outcsspath = $outdir . $name . '-' . $versionnum . '.css';
-		$this->outimagepath = $outdir . $name . '-' . $versionnum . '.png';
-		$this->outimageurl = $outurl . $name . '-' . $versionnum . '.png';
+		$this->outimagepath = $outdir . $name . '-' . $versionnum . $this->settings->format;
+		$this->outimageurl = $outurl . $name . '-' . $versionnum . $this->settings->format;
 	}
 
 	//Process the input directories, find the images in them and stick them into CSS rules
 	public function makeSprites()
 	{
-
 		//Add a css rule for the container class (the class that must be applied to all the sprites)
 		$this->css[$this->settings->className] = array(
 			'display' => 'inline-block',
@@ -112,10 +115,34 @@ class SpriteMaker
 		echo "\n$cmd\n";
 		exec($cmd);
 
-		//Optimise the resulting image with optipng
-		$cmd = 'optipng -o6 ' . $this->outimagepath;
-		echo "\n$cmd\n";
-		exec($cmd);
+		if ($this->settings->format == 'jpg') {
+
+			$jpegtran = exec('which jpegtran');
+			if ($jpegtran) {
+				//Optimise the resulting image with jpegtran
+				$cmd = "mv {$this->outimagepath} {$this->outimagepath}.orig.jpg";
+				echo "\n$cmd\n";
+				exec($cmd);
+
+				$cmd = "jpegtran -copy none -optimize {$this->outimagepath}.orig.jpg > {$this->outimagepath}";
+				echo "\n$cmd\n";
+				exec($cmd);
+
+				$cmd = "rm {$this->outimagepath}.orig.jpg";
+				echo "\n$cmd\n";
+				exec($cmd);
+			}
+
+		} elseif ($this->settings->format == 'png') {
+
+			$optipng = exec('which optipng');
+			if ($optipng) {
+				//Optimise the resulting image with optipng
+				$cmd = 'optipng -o6 ' . $this->outimagepath;
+				echo "\n$cmd\n";
+				exec($cmd);
+			}
+		}
 	}
 
 	//Returns a list of jpg, png and gif files in a directory

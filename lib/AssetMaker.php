@@ -144,7 +144,7 @@ class AssetMaker
 		}
 		fwrite($file, $contents);
 		fclose($file);
-		
+
 		if ($compress) {
 			$this->compress($path);
 		}
@@ -176,20 +176,19 @@ class AssetMaker
 		}
 		return $versionFilenames;
 	}
-	
+
 	private function compress($path)
 	{
 		if (!$this->zopfli) {
 			return false;
 		}
-		
+
 		$cmd = "{$this->zopfli} --i1000 {$path}";
 		echo "\n$cmd";
 		exec($cmd);
-		
+
 		$cmd = "touch {$path} {$path}.gz";
 		echo "\n$cmd";
 		exec($cmd);
-
 	}
 }
