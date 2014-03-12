@@ -124,7 +124,7 @@ class SpriteMaker
 				echo "\n$cmd\n";
 				exec($cmd);
 
-				$cmd = "jpegtran -copy none -optimize {$this->outimagepath}.orig.jpg > {$this->outimagepath}";
+				$cmd = "jpegtran -progressive -copy none -optimize {$this->outimagepath}.orig.jpg > {$this->outimagepath}";
 				echo "\n$cmd\n";
 				exec($cmd);
 
