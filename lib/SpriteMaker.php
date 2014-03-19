@@ -135,7 +135,8 @@ class SpriteMaker
 
 		} elseif ($this->settings->format == 'png') {
 
-			$advpng = exec('which advpng');
+			#$advpng = exec('which advpng');
+			$advpng = false;
 			$optipng = exec('which optipng');
 
 			if ($advpng) {
