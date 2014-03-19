@@ -135,8 +135,15 @@ class SpriteMaker
 
 		} elseif ($this->settings->format == 'png') {
 
+			$advpng = exec('which advpng');
 			$optipng = exec('which optipng');
-			if ($optipng) {
+
+			if ($advpng) {
+				//Optimise the resulting image with optipng
+				$cmd = 'advpng -z4 ' . $this->outimagepath;
+				echo "\n$cmd\n";
+				exec($cmd);
+			} elseif ($optipng) {
 				//Optimise the resulting image with optipng
 				$cmd = 'optipng -o6 ' . $this->outimagepath;
 				echo "\n$cmd\n";
