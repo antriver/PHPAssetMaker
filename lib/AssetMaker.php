@@ -179,7 +179,7 @@ class AssetMaker
 
 	private function compress($path)
 	{
-		if (!$this->zopfli) {
+		if (!$this->zopfli || (isset($this->settings->zopfli) && $this->settings->zopfli === false)) {
 			return false;
 		}
 
