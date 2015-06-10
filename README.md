@@ -3,7 +3,7 @@ PHPAssetMaker
 
 A PHP tool to generate combined and minfied CSS, CSS Sprites, and Javascript
 
-**No longer updated. You should probably juse Grunt/Gulp instead.**
+**No longer updated. You should probably use Grunt/Gulp instead.**
 
 ## How it works
 1. Specify your source files in settings.json
